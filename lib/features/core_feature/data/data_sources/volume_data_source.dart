@@ -28,7 +28,7 @@ class VolumeDataSource {
       String searchKey, SearchField searchField, int page) async {
     try {
       String url =
-          "${AppConfigs.baseURL}/volumes?q=${searchKey}&maxResults=${AppConfigs.maxResults}&key=${AppConfigs.apiKey}+${searchField.name}&page=${page}";
+          "${AppConfigs.baseURL}/volumes?q=${searchKey}+${searchField.name}&maxResults=${AppConfigs.maxResults}&key=${AppConfigs.apiKey}&page=${page}";
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body) as Map<String, dynamic>;
@@ -47,6 +47,24 @@ class VolumeDataSource {
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body) as Map<String, dynamic>;
         Item volumesModel = Item.fromJson(jsonData);
+        return volumesModel;
+      }
+    } catch (e) {
+      print("An error has occurred: ${e.toString()}");
+    }
+  }
+
+  Future<Volume?> getVolumeByCategory(
+      {required String searchKey,
+      required String category,
+      required int page}) async {
+    try {
+      String url =
+          "${AppConfigs.baseURL}/volumes?q=${searchKey}+subject:$category&maxResults=${AppConfigs.maxResults}&key=${AppConfigs.apiKey}&page=${page}";
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body) as Map<String, dynamic>;
+        Volume volumesModel = Volume.fromJson(jsonData);
         return volumesModel;
       }
     } catch (e) {

@@ -51,8 +51,10 @@ class CustomTextStyles {
 
   static TextStyle backgroundNormalTextStyle() {
     return const TextStyle(
-        color: AppColors.backroundColor,
-        fontSize: 14,
-        decoration: TextDecoration.underline);
+      color: AppColors.backroundColor,
+      fontSize: 14,
+      decoration: TextDecoration.underline,
+      decorationColor: AppColors.backroundColor,
+    );
   }
 }

@@ -21,7 +21,7 @@ class BookDescriptionWidget extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 5),
-            width: MediaQuery.of(context).size.width * 0.8,
+            width: MediaQuery.of(context).size.width,
             child: const Divider(
               color: Colors.grey,
               height: 0.8,

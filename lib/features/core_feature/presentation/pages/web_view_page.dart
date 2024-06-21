@@ -49,17 +49,14 @@ class _WebviewPageState extends State<WebviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         centerTitle: true,
         leading: CustomBackButton(),
         title: Text(
           widget.pageName,
           style: const TextStyle(fontSize: 16, color: Colors.black),
         ),
-        elevation: 0.0,
-        titleSpacing: 0,
+        elevation: 5,
       ),
       body: SizedBox.expand(
         child: WebViewWidget(controller: controller),

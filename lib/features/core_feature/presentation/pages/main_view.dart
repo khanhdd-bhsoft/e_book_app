@@ -10,18 +10,14 @@ class MainView extends StatelessWidget {
   MainView({super.key});
   final itemBottomNavBar = [
     const BottomNavigationBarItem(
-        backgroundColor: Colors.white,
-        icon: Icon(Icons.home_outlined),
-        label: "Home"),
+        icon: Icon(Icons.home_outlined), label: "Home"),
     const BottomNavigationBarItem(
       icon: Icon(Icons.explore_outlined),
       label: "Explore",
-      backgroundColor: Colors.white,
     ),
     const BottomNavigationBarItem(
       icon: Icon(Icons.settings_outlined),
       label: "Settings",
-      backgroundColor: Colors.white,
     ),
   ];
   @override
@@ -39,6 +35,7 @@ class MainView extends StatelessWidget {
       ),
       bottomNavigationBar: BlocBuilder<NavCubit, int>(
         builder: (context, state) => BottomNavigationBar(
+          selectedItemColor: Colors.black,
           backgroundColor: AppColors.thirdColor,
           elevation: 5,
           items: itemBottomNavBar,

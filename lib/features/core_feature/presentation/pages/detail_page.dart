@@ -1,5 +1,6 @@
 import 'package:e_book/core/constants/app_color.dart';
 import 'package:e_book/core/customs/custom_back_icon.dart';
+import 'package:e_book/core/customs/loading_widget.dart';
 import 'package:e_book/features/core_feature/presentation/blocs/volume_detail/volume_detail_bloc.dart';
 import 'package:e_book/features/core_feature/presentation/blocs/volume_detail/volume_detail_state.dart';
 import 'package:e_book/features/core_feature/presentation/pages/web_view_page.dart';
@@ -30,7 +31,7 @@ class DetailPage extends StatelessWidget {
             builder: (context, state) {
               if (state is VolumeDetailFetched) {
                 return IconButton(
-                    padding: EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(0),
                     onPressed: () {
                       if (state.item != null &&
                           state.item!.volumeInfo != null &&
@@ -51,7 +52,7 @@ class DetailPage extends StatelessWidget {
                     ));
               }
               return IconButton(
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   onPressed: () {},
                   icon: const Icon(
                     Icons.favorite_border,
@@ -91,9 +92,7 @@ class DetailPage extends StatelessWidget {
                 child: Text(state.message ?? "Something went wrong"),
               );
             } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const LoadingWidget();
             }
           },
         ),

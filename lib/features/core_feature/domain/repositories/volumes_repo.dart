@@ -14,4 +14,6 @@ abstract class VolumesRepo {
       required int page});
 
   Future<Either<Failure, Item?>> getDetailVolumeItem(String id);
+  Future<Either<Failure, Volume?>> getVolumeByCategory(
+      {required int page, required String searchKey, required String category});
 }

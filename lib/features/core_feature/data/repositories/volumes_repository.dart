@@ -48,4 +48,18 @@ class VolumesRepository implements VolumesRepo {
       return Left(ExceptionFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, Volume?>> getVolumeByCategory(
+      {required int page,
+      required String searchKey,
+      required String category}) async {
+    try {
+      final data = await volumeDataSource.getVolumeByCategory(
+          page: page, category: category, searchKey: searchKey);
+      return Right(data);
+    } catch (e) {
+      return Left(ExceptionFailure());
+    }
+  }
 }

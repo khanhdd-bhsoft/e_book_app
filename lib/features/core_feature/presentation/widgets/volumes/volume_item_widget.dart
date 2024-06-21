@@ -47,6 +47,7 @@ class VolumeItemWidget extends StatelessWidget {
             color: Colors.tealAccent.withOpacity(0.5)),
         height: size.height * 0.14,
         width: size.width * 0.9,
+        padding: const EdgeInsets.all(5),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -54,9 +55,12 @@ class VolumeItemWidget extends StatelessWidget {
               height: size.height * 0.14,
               width: size.height * 0.14,
               child: image != ""
-                  ? Image.network(
-                      image,
-                      fit: BoxFit.cover,
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        image,
+                        fit: BoxFit.cover,
+                      ),
                     )
                   : Image.asset(
                       ImageData.placeHolderImage,

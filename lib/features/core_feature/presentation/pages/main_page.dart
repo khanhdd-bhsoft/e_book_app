@@ -1,4 +1,5 @@
 import 'package:e_book/core/constants/app_color.dart';
+import 'package:e_book/core/customs/loading_widget.dart';
 import 'package:e_book/features/core_feature/presentation/blocs/search_volumes/search_volumes_bloc.dart';
 import 'package:e_book/features/core_feature/presentation/blocs/search_volumes/search_volumes_event.dart';
 import 'package:flutter/material.dart';
@@ -19,19 +20,26 @@ class _MainPageState extends State<MainPage> {
   ScrollController _scrollController = ScrollController();
   int page = 1;
   final searchController = TextEditingController();
+  bool _isLoading = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
-          _scrollController.position.maxScrollExtent - 10) {
+              _scrollController.position.maxScrollExtent - 10 &&
+          !_isLoading) {
         setState(() {
           page++;
+          _isLoading = true;
         });
         BlocProvider.of<SearchVolumeBloc>(context).add(
             SearchVolumesWithKey(searchKey: searchController.text, page: page));
         print("Hey hey hey page is ${page}");
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
       }
     });
   }
@@ -130,9 +138,7 @@ class _MainPageState extends State<MainPage> {
                   child: Text(state.message ?? "Something went wrong"),
                 );
               } else if (state is SearchVolumesLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
+                return const LoadingWidget();
               } else {
                 return const SizedBox();
               }

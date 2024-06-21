@@ -46,9 +46,12 @@ class TopDetailWidget extends StatelessWidget {
                     Container(
                       height: size.height * 0.18,
                       child: image != ""
-                          ? Image.network(
-                              image,
-                              fit: BoxFit.contain,
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                image,
+                                fit: BoxFit.contain,
+                              ),
                             )
                           : Image.asset(
                               ImageData.placeHolderImage,

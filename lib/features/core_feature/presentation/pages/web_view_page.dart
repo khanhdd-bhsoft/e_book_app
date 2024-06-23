@@ -48,18 +48,26 @@ class _WebviewPageState extends State<WebviewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        leading: CustomBackButton(),
-        title: Text(
-          widget.pageName,
-          style: const TextStyle(fontSize: 16, color: Colors.black),
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          Navigator.of(context).pop();
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          leading: CustomBackButton(),
+          title: Text(
+            widget.pageName,
+            style: const TextStyle(fontSize: 16, color: Colors.black),
+          ),
+          elevation: 5,
         ),
-        elevation: 5,
-      ),
-      body: SizedBox.expand(
-        child: WebViewWidget(controller: controller),
+        body: SizedBox.expand(
+          child: WebViewWidget(controller: controller),
+        ),
       ),
     );
   }

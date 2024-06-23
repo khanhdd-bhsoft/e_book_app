@@ -17,10 +17,10 @@ class CustomListHorizontalCatogory extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return SizedBox(
       // decoration: BoxDecoration(border: Border.all(color: Colors.pink)),
-      height: size.height * 0.28,
+      height: size.height * 0.3,
       width: size.width,
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             // padding: const EdgeInsets.only(right: 25),
@@ -37,7 +37,7 @@ class CustomListHorizontalCatogory extends StatelessWidget {
                   },
                   child: Text(
                     "See all",
-                    style: CustomTextStyles.backgroundNormalTextStyle(),
+                    style: CustomTextStyles.seeMoreNormalTextStyle(),
                   ),
                 ),
               ],

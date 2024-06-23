@@ -1,5 +1,7 @@
+import 'package:e_book/core/constants/app_color.dart';
 import 'package:e_book/core/constants/image_data.dart';
 import 'package:e_book/core/customs/custom_text_style.dart';
+import 'package:e_book/core/utils/dialog_helpers.dart';
 import 'package:e_book/features/core_feature/data/models/volume/item.dart';
 import 'package:e_book/features/core_feature/data/models/volume_model.dart';
 import 'package:e_book/features/core_feature/presentation/blocs/volume_detail/volume_detail_bloc.dart';
@@ -30,28 +32,32 @@ class VolumeItemWidget extends StatelessWidget {
     }
 
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         if (volumeModel.id != null) {
           BlocProvider.of<VolumeDetailBloc>(context)
               .add(VolumeDetailFetch(id: volumeModel.id!));
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return const DetailPage();
+            },
+          ));
+        } else {
+          await DialogHelpes()
+              .showBasicDialog("Cannot open this book", context);
         }
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) {
-            return const DetailPage();
-          },
-        ));
       },
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            color: Colors.tealAccent.withOpacity(0.5)),
+            color: AppColors.itemCardColor),
         height: size.height * 0.14,
         width: size.width * 0.9,
         padding: const EdgeInsets.all(5),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
+            Container(
+              padding: const EdgeInsets.all(2),
               height: size.height * 0.14,
               width: size.height * 0.14,
               child: image != ""
@@ -62,9 +68,12 @@ class VolumeItemWidget extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     )
-                  : Image.asset(
-                      ImageData.placeHolderImage,
-                      fit: BoxFit.cover,
+                  : Container(
+                      padding: const EdgeInsets.all(2),
+                      child: Image.asset(
+                        ImageData.placeHolderImage,
+                        fit: BoxFit.cover,
+                      ),
                     ),
             ),
             Expanded(
@@ -80,7 +89,7 @@ class VolumeItemWidget extends StatelessWidget {
                             vertical: 2, horizontal: 2),
                         child: Text(
                           volumeModel.volumeInfo!.title ?? "...",
-                          style: CustomTextStyles.headerTextStyle(),
+                          style: CustomTextStyles.header3TextStyle(),
                           maxLines: 2,
                         ),
                       ),

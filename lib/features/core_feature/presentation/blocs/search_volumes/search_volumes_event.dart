@@ -21,8 +21,12 @@ class SearchVolumesWithKeyAndParams extends SearchVolumesEvent {
   String searchKey;
   SearchField searchField;
   int page;
+  String criteriaString;
   SearchVolumesWithKeyAndParams(
-      {required this.searchKey, required this.searchField, this.page = 1});
+      {required this.searchKey,
+      required this.searchField,
+      this.page = 1,
+      this.criteriaString = ""});
   @override
   // TODO: implement props
   List<Object?> get props => [searchKey, searchField];

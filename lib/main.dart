@@ -1,10 +1,18 @@
+import 'package:e_book/core/constants/app_themes.dart';
+import 'package:e_book/core/constants/list_category.dart';
 import 'package:e_book/core/injection/injection_dependencies.dart';
+import 'package:e_book/features/core_feature/domain/usecases/themes/change_theme_uc.dart';
+import 'package:e_book/features/core_feature/domain/usecases/themes/get_theme_uc.dart';
 import 'package:e_book/features/core_feature/domain/usecases/volume_item/get_volume_item_uc.dart';
 import 'package:e_book/features/core_feature/domain/usecases/volumes/get_search_volumes_by_text.dart';
 import 'package:e_book/features/core_feature/domain/usecases/volumes/get_search_volumes_by_text_param.dart';
+import 'package:e_book/features/core_feature/presentation/blocs/list_default_category/default_categories_bloc.dart';
+import 'package:e_book/features/core_feature/presentation/blocs/list_default_category/default_categories_event.dart';
 import 'package:e_book/features/core_feature/presentation/blocs/nav/nav_cubit.dart';
 import 'package:e_book/features/core_feature/presentation/blocs/search_volumes/search_volumes_bloc.dart';
+import 'package:e_book/features/core_feature/presentation/blocs/themes/theme_cubit.dart';
 import 'package:e_book/features/core_feature/presentation/blocs/volume_detail/volume_detail_bloc.dart';
+import 'package:e_book/features/core_feature/presentation/blocs/volumes_by_category/volumes_by_category_bloc.dart';
 import 'package:e_book/features/core_feature/presentation/pages/main_page.dart';
 import 'package:e_book/features/core_feature/presentation/pages/main_view.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +35,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+          create: (context) => ThemeCubit(
+              changeThemeUseCase: sl.get<ChangeThemeUseCase>(),
+              getThemeUseCase: sl.get<GetThemeUseCase>()),
+        ),
+        BlocProvider(
           create: (context) => NavCubit(),
         ),
         BlocProvider(
@@ -36,18 +49,26 @@ class MyApp extends StatelessWidget {
               getSearchVolumeByTextUC: sl.get<GetSearchVolumeByTextUC>()),
         ),
         BlocProvider(
+          create: (context) => sl.get<DefaultCategoriesBloc>()
+            ..add(DefaultCategoriesFetch(listData: defaultListCategory)),
+        ),
+        BlocProvider(
           create: (context) => VolumeDetailBloc(
               getVolumeItemUseCase: sl.get<GetVolumeItemUseCase>()),
-        )
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
         ),
-        home: MainView(),
+        BlocProvider(
+          create: (context) => sl.get<VolumesByCategoryBloc>(),
+        ),
+      ],
+      child: BlocBuilder<ThemeCubit, bool>(
+        builder: (context, state) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: state ? AppTheme.lightThemes : AppTheme.darkTheme,
+          themeMode: ThemeMode.system,
+          darkTheme: AppTheme.darkTheme,
+          home: MainView(),
+        ),
       ),
     );
   }

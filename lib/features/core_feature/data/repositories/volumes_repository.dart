@@ -18,10 +18,11 @@ class VolumesRepository implements VolumesRepo {
   Future<Either<Failure, Volume?>> getSearchVolumesByTextAndParams(
       {required String text,
       required SearchField searchField,
-      required int page}) async {
+      required int page,
+      required String criteriaString}) async {
     try {
       final data = await volumeDataSource.searchVolumeByTextAndParam(
-          text, searchField, page);
+          text, searchField, page, criteriaString);
       return Right(data);
     } catch (e) {
       return Left(ExceptionFailure());

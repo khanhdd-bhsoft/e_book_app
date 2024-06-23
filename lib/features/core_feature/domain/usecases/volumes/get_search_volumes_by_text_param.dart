@@ -11,8 +11,12 @@ class GetSearchVolumeByTextParamUC {
   Future<Either<Failure, Volume?>> call(
       {required String text,
       required SearchField searchField,
-      required int page}) async {
+      required int page,
+      required String criteriaString}) async {
     return await volumesRepo.getSearchVolumesByTextAndParams(
-        text: text, searchField: searchField, page: page);
+        text: text,
+        searchField: searchField,
+        page: page,
+        criteriaString: criteriaString);
   }
 }

@@ -54,6 +54,14 @@ class CustomTextStyles {
       color: AppColors.backroundColor,
       fontSize: 14,
       decoration: TextDecoration.underline,
+    );
+  }
+
+  static TextStyle seeMoreNormalTextStyle() {
+    return const TextStyle(
+      color: AppColors.backroundColor,
+      fontSize: 14,
+      decoration: TextDecoration.underline,
       decorationColor: AppColors.backroundColor,
     );
   }

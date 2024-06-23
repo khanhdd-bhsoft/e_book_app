@@ -20,7 +20,7 @@ class BookDescriptionWidget extends StatelessWidget {
             style: CustomTextStyles.backgroundHeaderTextStyle(),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
             width: MediaQuery.of(context).size.width,
             child: const Divider(
               color: Colors.grey,
@@ -95,7 +95,7 @@ class _ExpandableDescriptionState extends State<ExpandableDescription> {
           },
           child: Text(
             webViewHeight == 100.0 ? "Show more" : "Show less",
-            style: CustomTextStyles.backgroundNormalTextStyle(),
+            style: CustomTextStyles.seeMoreNormalTextStyle(),
           ),
         )
       ],

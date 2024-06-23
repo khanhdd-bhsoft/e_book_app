@@ -24,11 +24,11 @@ class VolumeDataSource {
     }
   }
 
-  Future<Volume?> searchVolumeByTextAndParam(
-      String searchKey, SearchField searchField, int page) async {
+  Future<Volume?> searchVolumeByTextAndParam(String searchKey,
+      SearchField searchField, int page, String criteriaString) async {
     try {
       String url =
-          "${AppConfigs.baseURL}/volumes?q=${searchKey}+${searchField.name}&maxResults=${AppConfigs.maxResults}&key=${AppConfigs.apiKey}&page=${page}";
+          "${AppConfigs.baseURL}/volumes?q=${searchKey}+${searchField.name}:${criteriaString}&maxResults=${AppConfigs.maxResults}&key=${AppConfigs.apiKey}&page=${page}";
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body) as Map<String, dynamic>;

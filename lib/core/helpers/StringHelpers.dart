@@ -1,3 +1,5 @@
+import 'package:e_book/core/enum/search_field.dart';
+
 class StringHelpers {
   static String makeHtml(String string) {
     return """
@@ -46,5 +48,24 @@ $string
 
 </html>
 """;
+  }
+
+  static String getReaableCriteriaText(SearchField searchField) {
+    switch (searchField) {
+      case SearchField.inauthor:
+        return "Author";
+      case SearchField.inpublisher:
+        return "Publisher";
+      case SearchField.intitle:
+        return "Title";
+      case SearchField.subject:
+        return "Subject";
+      case SearchField.isbn:
+        return "ISBN";
+      case SearchField.lccn:
+        return "LCCN";
+      case SearchField.oclc:
+        return "OCLC";
+    }
   }
 }

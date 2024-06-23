@@ -61,7 +61,8 @@ class SearchVolumeBloc extends Bloc<SearchVolumesEvent, SearchVolumesState> {
       final result = await getSearchVolumeByTextParamUC.call(
           text: event.searchKey,
           searchField: event.searchField,
-          page: event.page);
+          page: event.page,
+          criteriaString: event.criteriaString);
 
       result.fold((l) => emit(SearchVolumesFailed(message: l.message)), (r) {
         if (r != null) {

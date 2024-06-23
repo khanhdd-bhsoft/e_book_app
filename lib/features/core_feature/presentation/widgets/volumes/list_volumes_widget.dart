@@ -1,3 +1,4 @@
+import 'package:e_book/core/customs/loading_widget.dart';
 import 'package:e_book/features/core_feature/presentation/blocs/search_volumes/search_volumes_bloc.dart';
 import 'package:e_book/features/core_feature/presentation/blocs/search_volumes/search_volumes_event.dart';
 import 'package:e_book/features/core_feature/presentation/blocs/search_volumes/search_volumes_state.dart';
@@ -73,9 +74,7 @@ class _ListVolumesWidgetState extends State<ListVolumesWidget> {
             child: Text(state.message ?? "Something went wrong"),
           );
         } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return const LoadingWidget();
         }
       },
     );

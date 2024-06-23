@@ -44,6 +44,7 @@ class TopDetailWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
+                      padding: const EdgeInsets.all(2),
                       height: size.height * 0.18,
                       child: image != ""
                           ? ClipRRect(
@@ -58,24 +59,24 @@ class TopDetailWidget extends StatelessWidget {
                               fit: BoxFit.contain,
                             ),
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          if (item.volumeInfo != null &&
-                              item.accessInfo != null &&
-                              item.accessInfo!.webReaderLink != null) {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) {
-                                return WebviewPage(
-                                    pageName: item.volumeInfo!.title!,
-                                    url: item.accessInfo!.webReaderLink!);
-                              },
-                            ));
-                          }
-                        },
-                        child: Text(
-                          "Read book",
-                          style: CustomTextStyles.header3TextStyle(),
-                        )),
+                    // ElevatedButton(
+                    //     onPressed: () {
+                    //       if (item.volumeInfo != null &&
+                    //           item.accessInfo != null &&
+                    //           item.accessInfo!.webReaderLink != null) {
+                    //         Navigator.of(context).push(MaterialPageRoute(
+                    //           builder: (context) {
+                    //             return WebviewPage(
+                    //                 pageName: item.volumeInfo!.title!,
+                    //                 url: item.accessInfo!.webReaderLink!);
+                    //           },
+                    //         ));
+                    //       }
+                    //     },
+                    //     child: Text(
+                    //       "Read book",
+                    //       style: CustomTextStyles.header3TextStyle(),
+                    //     )),
                   ],
                 ),
               ),

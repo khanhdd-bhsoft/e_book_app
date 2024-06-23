@@ -5,6 +5,7 @@ import 'package:e_book/features/core_feature/data/models/volume/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/utils/dialog_helpers.dart';
 import '../../blocs/volume_detail/volume_detail_bloc.dart';
 import '../../blocs/volume_detail/volume_detail_event.dart';
 import '../../pages/detail_page.dart';
@@ -29,7 +30,7 @@ class VolumeGridItem extends StatelessWidget {
       }
     }
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         if (item.id != null) {
           BlocProvider.of<VolumeDetailBloc>(context)
               .add(VolumeDetailFetch(id: item.id!));
@@ -38,6 +39,9 @@ class VolumeGridItem extends StatelessWidget {
               return const DetailPage();
             },
           ));
+        } else {
+          await DialogHelpes()
+              .showBasicDialog("Cannot open this book", context);
         }
       },
       child: Container(
@@ -45,7 +49,7 @@ class VolumeGridItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             color: const Color.fromARGB(255, 240, 239, 239),
             border: Border.all(color: AppColors.thirdColor.withOpacity(0.5))),
-        height: MediaQuery.of(context).size.height * 0.26,
+        height: MediaQuery.of(context).size.height * 0.28,
         width: MediaQuery.of(context).size.width * 0.32,
         padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 3),
         // margin: EdgeInsets.symmetric(horizontal: ),
@@ -54,7 +58,7 @@ class VolumeGridItem extends StatelessWidget {
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.16,
-              width: MediaQuery.of(context).size.width * 0.32,
+              width: MediaQuery.of(context).size.width * 0.36,
               child: image != ""
                   ? ClipRRect(
                       borderRadius: BorderRadius.circular(10),
@@ -63,16 +67,19 @@ class VolumeGridItem extends StatelessWidget {
                         fit: BoxFit.contain,
                       ),
                     )
-                  : Image.asset(ImageData.placeHolderImage),
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(ImageData.placeHolderImage)),
             ),
             // Expanded(
             //     child: Center(
             //   child:
             Text(
               item.volumeInfo!.title!,
-              style: CustomTextStyles.header3TextStyle(),
+              style: CustomTextStyles.normalTextStyle(),
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
+              maxLines: 2,
             ),
             // ))
           ],

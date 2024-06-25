@@ -41,20 +41,23 @@ class _ListVolumesWidgetState extends State<ListVolumesWidget> {
       builder: (context, state) {
         if (state is SearchVolumesFetched) {
           return SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(state.volumesModel!.kind ?? "kind"),
-                    Text(state.volumesModel!.totalItems != null
-                        ? "${state.volumesModel!.totalItems} items"
-                        : "... items"),
+                    Text(
+                      state.volumesModel!.totalItems != null
+                          ? "${state.volumesModel!.totalItems} items"
+                          : "... items",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
                   ],
                 ),
                 ListView.separated(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     controller: _scrollController,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
@@ -71,7 +74,10 @@ class _ListVolumesWidgetState extends State<ListVolumesWidget> {
           );
         } else if (state is SearchVolumesFailed) {
           return Center(
-            child: Text(state.message ?? "Something went wrong"),
+            child: Text(
+              state.message ?? "Something went wrong",
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
           );
         } else {
           return const LoadingWidget();

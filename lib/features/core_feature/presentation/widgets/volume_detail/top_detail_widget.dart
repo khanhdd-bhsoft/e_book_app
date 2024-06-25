@@ -89,7 +89,7 @@ class TopDetailWidget extends StatelessWidget {
                     children: [
                       Text(
                         item.volumeInfo!.title ?? "Title ...",
-                        style: CustomTextStyles.headerTextStyle(),
+                        style: Theme.of(context).textTheme.displayLarge,
                         overflow: TextOverflow.clip,
                       ),
                       if (item.volumeInfo!.authors != null &&
@@ -97,7 +97,7 @@ class TopDetailWidget extends StatelessWidget {
                         Wrap(
                           crossAxisAlignment: WrapCrossAlignment.start,
                           children: CommonMethods.buildAuthorsWithCommas(
-                              item.volumeInfo!.authors!),
+                              item.volumeInfo!.authors!, context),
                         ),
                     ],
                   ),
@@ -111,7 +111,7 @@ class TopDetailWidget extends StatelessWidget {
               children: [
                 Text(
                   "Categories",
-                  style: CustomTextStyles.header3TextStyle(),
+                  style: Theme.of(context).textTheme.displaySmall,
                 ),
                 ListView.builder(
                   shrinkWrap: true,
@@ -121,7 +121,7 @@ class TopDetailWidget extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                     child: Text(
                       item.volumeInfo!.categories![index],
-                      style: CustomTextStyles.normalTextStyle(),
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
                   itemCount: item.volumeInfo!.categories!.length,

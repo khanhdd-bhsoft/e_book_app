@@ -91,15 +91,21 @@ class _VolumesCategoryPageState extends State<VolumesCategoryPage> {
                 }
                 return SizedBox(
                   height: MediaQuery.of(context).size.height * 0.8,
-                  child: const Center(
-                    child: Text("No data"),
+                  child: Center(
+                    child: Text(
+                      "No data",
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
                   ),
                 );
               } else if (state is VolumesByCategoryFailed) {
                 return SizedBox(
                   height: MediaQuery.of(context).size.height * 0.8,
                   child: Center(
-                    child: Text(state.message ?? "Something went wrong"),
+                    child: Text(
+                      state.message ?? "Something went wrong",
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
                   ),
                 );
               } else {
@@ -114,6 +120,7 @@ class _VolumesCategoryPageState extends State<VolumesCategoryPage> {
 
   AppBar buildAppBar() {
     return AppBar(
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       centerTitle: true,
       leading: CustomBackButton(),
       elevation: 5,
@@ -147,7 +154,7 @@ class _VolumesCategoryPageState extends State<VolumesCategoryPage> {
     return AnimatedCrossFade(
         firstChild: Text(
           widget.category,
-          style: CustomTextStyles.header2TextStyle(),
+          style: Theme.of(context).textTheme.displayMedium,
         ),
         secondChild: SizedBox(
           height: 45,
@@ -161,6 +168,7 @@ class _VolumesCategoryPageState extends State<VolumesCategoryPage> {
                   borderSide: const BorderSide(color: Colors.black),
                   borderRadius: BorderRadius.circular(10)),
               hintText: "Search",
+              hintStyle: Theme.of(context).textTheme.bodyLarge,
               suffixIcon: IconButton(
                 onPressed: () {
                   setState(() {

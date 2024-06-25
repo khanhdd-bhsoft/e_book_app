@@ -8,7 +8,10 @@ class CustomErrorWidget extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.8,
       child: Center(
-        child: Text(message),
+        child: Text(
+          message,
+          style: Theme.of(context).textTheme.displaySmall,
+        ),
       ),
     );
   }

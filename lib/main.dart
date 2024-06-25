@@ -1,6 +1,8 @@
+import 'package:e_book/core/app/root_page.dart';
 import 'package:e_book/core/constants/app_themes.dart';
 import 'package:e_book/core/constants/list_category.dart';
 import 'package:e_book/core/injection/injection_dependencies.dart';
+import 'package:e_book/features/auth/presentation/blocs/auth_bloc.dart';
 import 'package:e_book/features/core_feature/domain/usecases/themes/change_theme_uc.dart';
 import 'package:e_book/features/core_feature/domain/usecases/themes/get_theme_uc.dart';
 import 'package:e_book/features/core_feature/domain/usecases/volume_item/get_volume_item_uc.dart';
@@ -15,6 +17,8 @@ import 'package:e_book/features/core_feature/presentation/blocs/volume_detail/vo
 import 'package:e_book/features/core_feature/presentation/blocs/volumes_by_category/volumes_by_category_bloc.dart';
 import 'package:e_book/features/core_feature/presentation/pages/main_page.dart';
 import 'package:e_book/features/core_feature/presentation/pages/main_view.dart';
+import 'package:e_book/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -23,6 +27,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await initDependencies();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -38,6 +45,9 @@ class MyApp extends StatelessWidget {
           create: (context) => ThemeCubit(
               changeThemeUseCase: sl.get<ChangeThemeUseCase>(),
               getThemeUseCase: sl.get<GetThemeUseCase>()),
+        ),
+        BlocProvider(
+          create: (context) => sl.get<AuthBloc>(),
         ),
         BlocProvider(
           create: (context) => NavCubit(),
@@ -60,16 +70,17 @@ class MyApp extends StatelessWidget {
           create: (context) => sl.get<VolumesByCategoryBloc>(),
         ),
       ],
-      child: BlocBuilder<ThemeCubit, bool>(
-        builder: (context, state) => MaterialApp(
+      child: BlocBuilder<ThemeCubit, bool>(builder: (context, state) {
+        print("Theme is: ${state}");
+        return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-          theme: state ? AppTheme.lightThemes : AppTheme.darkTheme,
+          theme: !state ? AppTheme.lightThemes : AppTheme.darkTheme,
           themeMode: ThemeMode.system,
           darkTheme: AppTheme.darkTheme,
-          home: MainView(),
-        ),
-      ),
+          home: RootPage(),
+        );
+      }),
     );
   }
 }

@@ -17,7 +17,7 @@ class BookDescriptionWidget extends StatelessWidget {
         children: [
           Text(
             "Book description",
-            style: CustomTextStyles.backgroundHeaderTextStyle(),
+            style: Theme.of(context).textTheme.displaySmall,
           ),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
@@ -95,7 +95,7 @@ class _ExpandableDescriptionState extends State<ExpandableDescription> {
           },
           child: Text(
             webViewHeight == 100.0 ? "Show more" : "Show less",
-            style: CustomTextStyles.seeMoreNormalTextStyle(),
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         )
       ],

@@ -10,7 +10,10 @@ class CustomBackButton extends StatelessWidget {
       width: 40,
       child: Center(
         child: InkWell(
-          child: const Icon(Icons.arrow_back_ios),
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Theme.of(context).appBarTheme.iconTheme!.color,
+          ),
           onTap: () {
             if (callBack != null) {
               callBack!();

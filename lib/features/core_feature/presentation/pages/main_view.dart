@@ -35,8 +35,10 @@ class MainView extends StatelessWidget {
       ),
       bottomNavigationBar: BlocBuilder<NavCubit, int>(
         builder: (context, state) => BottomNavigationBar(
-          selectedItemColor: Colors.black,
-          backgroundColor: AppColors.thirdColor,
+          selectedItemColor:
+              Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+          backgroundColor:
+              Theme.of(context).bottomNavigationBarTheme.backgroundColor,
           elevation: 5,
           items: itemBottomNavBar,
           currentIndex: state,

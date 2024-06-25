@@ -17,9 +17,43 @@ class DialogHelpes {
             child: Text(
               message,
               maxLines: 3,
-              style: CustomTextStyles.header3TextStyle(),
+              style: Theme.of(context).textTheme.displaySmall,
               textAlign: TextAlign.center,
             ),
+          );
+        });
+  }
+
+  Future<void> showLogoutDialog(
+      BuildContext context, String title, Function yesAnswer) async {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            title: Text(
+              title,
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
+            // content: Text('Hey! I am Coflutter!'),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(_).pop();
+                  },
+                  child: Text(
+                    "No",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  )),
+              TextButton(
+                onPressed: () async {
+                  yesAnswer();
+                },
+                child: Text(
+                  "Yes",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              )
+            ],
           );
         });
   }

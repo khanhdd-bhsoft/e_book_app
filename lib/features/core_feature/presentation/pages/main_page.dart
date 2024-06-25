@@ -134,7 +134,7 @@ class _MainPageState extends State<MainPage> {
 
   AppBar buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.backroundColor.withOpacity(0.5),
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       elevation: 5,
       title: SizedBox(
         height: 50,
@@ -168,7 +168,8 @@ class _MainPageState extends State<MainPage> {
                         });
                       },
                       icon: const Icon(Icons.clear_outlined)),
-              hintText: "Search anything ..."),
+              hintText: "Search anything ...",
+              hintStyle: Theme.of(context).textTheme.bodyLarge),
           onSubmitted: (value) {
             setState(() {
               searchKey = value;
@@ -240,6 +241,8 @@ class _MainPageState extends State<MainPage> {
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                   hintText: "Enter category",
+                                  hintStyle:
+                                      Theme.of(context).textTheme.bodyLarge,
                                   suffixIcon: IconButton(
                                       onPressed: () {
                                         setState(() {
@@ -278,7 +281,7 @@ class _MainPageState extends State<MainPage> {
                               child: Text(
                                 StringHelpers.getReaableCriteriaText(
                                     searchField!),
-                                style: CustomTextStyles.normalTextStyle(),
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                             ),
                           ),
@@ -304,7 +307,7 @@ class _MainPageState extends State<MainPage> {
               padding: const EdgeInsets.symmetric(vertical: 5),
               child: Text(
                 "Search criteria",
-                style: CustomTextStyles.header2TextStyle(),
+                style: Theme.of(context).textTheme.displaySmall,
               ),
             ),
             RadioListTile(
@@ -317,7 +320,7 @@ class _MainPageState extends State<MainPage> {
                 },
                 title: Text(
                   "Any",
-                  style: CustomTextStyles.header3TextStyle(),
+                  style: Theme.of(context).textTheme.bodyLarge,
                 )),
             RadioListTile(
                 value: SearchField.intitle,
@@ -329,7 +332,7 @@ class _MainPageState extends State<MainPage> {
                 },
                 title: Text(
                   "In title",
-                  style: CustomTextStyles.header3TextStyle(),
+                  style: Theme.of(context).textTheme.bodyLarge,
                 )),
             RadioListTile(
                 value: SearchField.inauthor,
@@ -341,7 +344,7 @@ class _MainPageState extends State<MainPage> {
                 },
                 title: Text(
                   "In author",
-                  style: CustomTextStyles.header3TextStyle(),
+                  style: Theme.of(context).textTheme.bodyLarge,
                 )),
             RadioListTile(
                 value: SearchField.inpublisher,
@@ -353,7 +356,7 @@ class _MainPageState extends State<MainPage> {
                 },
                 title: Text(
                   "In publicer",
-                  style: CustomTextStyles.header3TextStyle(),
+                  style: Theme.of(context).textTheme.bodyLarge,
                 )),
             RadioListTile(
                 value: SearchField.subject,
@@ -363,10 +366,8 @@ class _MainPageState extends State<MainPage> {
                     searchField = value;
                   });
                 },
-                title: Text(
-                  "Subject",
-                  style: CustomTextStyles.header3TextStyle(),
-                )),
+                title: Text("Subject",
+                    style: Theme.of(context).textTheme.bodyLarge)),
             RadioListTile(
                 value: SearchField.isbn,
                 groupValue: searchField,
@@ -375,10 +376,8 @@ class _MainPageState extends State<MainPage> {
                     searchField = value;
                   });
                 },
-                title: Text(
-                  "ISBN",
-                  style: CustomTextStyles.header3TextStyle(),
-                )),
+                title:
+                    Text("ISBN", style: Theme.of(context).textTheme.bodyLarge)),
             RadioListTile(
                 value: SearchField.lccn,
                 groupValue: searchField,
@@ -387,10 +386,8 @@ class _MainPageState extends State<MainPage> {
                     searchField = value;
                   });
                 },
-                title: Text(
-                  "LCCN",
-                  style: CustomTextStyles.header3TextStyle(),
-                )),
+                title:
+                    Text("LCCN", style: Theme.of(context).textTheme.bodyLarge)),
             RadioListTile(
               value: SearchField.oclc,
               groupValue: searchField,
@@ -399,10 +396,7 @@ class _MainPageState extends State<MainPage> {
                   searchField = value;
                 });
               },
-              title: Text(
-                "OCLC",
-                style: CustomTextStyles.header3TextStyle(),
-              ),
+              title: Text("OCLC", style: Theme.of(context).textTheme.bodyLarge),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.1,
@@ -451,10 +445,8 @@ class _MainPageState extends State<MainPage> {
                       padding: const EdgeInsets.all(5),
                       height: 50,
                       width: MediaQuery.of(context).size.width * 0.3,
-                      child: Text(
-                        "Apply",
-                        style: CustomTextStyles.header3TextStyle(),
-                      ),
+                      child: Text("Apply",
+                          style: Theme.of(context).textTheme.bodyLarge),
                     ),
                   ),
                 ],

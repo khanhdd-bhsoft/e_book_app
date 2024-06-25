@@ -20,11 +20,14 @@ class ExplorePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         centerTitle: true,
         elevation: 5,
         title: Text(
           "Explore",
-          style: CustomTextStyles.header2TextStyle(),
+          style: Theme.of(context).textTheme.displayMedium,
+
+          //  CustomTextStyles.header2TextStyle(),
         ),
       ),
       body: Padding(

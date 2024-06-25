@@ -29,7 +29,7 @@ class CustomListHorizontalCatogory extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: CustomTextStyles.header3TextStyle(),
+                  style: Theme.of(context).textTheme.displaySmall,
                 ),
                 TextButton(
                   onPressed: () async {
@@ -37,7 +37,7 @@ class CustomListHorizontalCatogory extends StatelessWidget {
                   },
                   child: Text(
                     "See all",
-                    style: CustomTextStyles.seeMoreNormalTextStyle(),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
               ],

@@ -19,14 +19,15 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: true,
+      canPop: false,
       onPopInvoked: (didPop) {
-        if (didPop) {
+        if (!didPop) {
           Navigator.of(context).pop();
         }
       },
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           elevation: 2,
           leading: CustomBackButton(),
           actions: [
@@ -93,12 +94,18 @@ class DetailPage extends StatelessWidget {
                     ),
                   );
                 }
-                return const Center(
-                  child: Text("Value is null"),
+                return Center(
+                  child: Text(
+                    "Value is null",
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
                 );
               } else if (state is VolumeDetailFailed) {
                 return Center(
-                  child: Text(state.message ?? "Something went wrong"),
+                  child: Text(
+                    state.message ?? "Something went wrong",
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
                 );
               } else {
                 return const LoadingWidget();
@@ -141,7 +148,7 @@ class DetailPage extends StatelessWidget {
                 child: Center(
                   child: Text(
                     "Read book",
-                    style: CustomTextStyles.header3TextStyle(),
+                    style: Theme.of(context).textTheme.displaySmall,
                     textAlign: TextAlign.center,
                   ),
                 ),

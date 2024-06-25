@@ -50,7 +50,7 @@ class VolumeItemWidget extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             color: AppColors.itemCardColor),
-        height: size.height * 0.14,
+        height: size.height * 0.15,
         width: size.width * 0.9,
         padding: const EdgeInsets.all(5),
         child: Row(
@@ -85,8 +85,7 @@ class VolumeItemWidget extends StatelessWidget {
                   children: [
                     if (volumeModel.volumeInfo != null)
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 2, horizontal: 2),
+                        padding: const EdgeInsets.symmetric(horizontal: 2),
                         child: Text(
                           volumeModel.volumeInfo!.title ?? "...",
                           style: CustomTextStyles.header3TextStyle(),

@@ -57,11 +57,12 @@ class _WebviewPageState extends State<WebviewPage> {
       },
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           centerTitle: true,
           leading: CustomBackButton(),
           title: Text(
             widget.pageName,
-            style: const TextStyle(fontSize: 16, color: Colors.black),
+            style: Theme.of(context).textTheme.displayMedium,
           ),
           elevation: 5,
         ),
